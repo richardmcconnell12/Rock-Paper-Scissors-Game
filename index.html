@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RPS</title>
+</head>
+<body>
+    To play, open dev tools and type game() into the console
+    <script>
+        let score = 0;
+        function computerPlay() {
+            let choice = Math.floor(Math.random() *3)
+            switch (choice) {
+                case 0:
+                    return "Rock";
+                break;
+                case 1:
+                    return "Paper";
+                break;
+                case 2:
+                    return "Scissors";
+                break;
+            }
+        }
+        function playRound(playerSelect, computerSelect) {
+            playerSelect = playerSelect[0].toUpperCase() + playerSelect.slice(1).toLowerCase();
+            let outcome;
+            let winner;
+            let loser;
+            let beatOrTie = "beats";
+            switch (computerSelect) {
+                case "Rock":
+                    if (playerSelect == "Rock") {
+                        beatOrTie = "ties";
+                        outcome = "tied";
+                        winner = computerSelect;
+                        loser = playerSelect;
+                    }
+                    else if (playerSelect == "Paper") {
+                        outcome = "win";
+                        winner = playerSelect;
+                        loser = computerSelect;
+                    }
+                    else {
+                        outcome = "lose";
+                        loser = playerSelect;
+                        winner = computerSelect;
+                    }
+                break;
+
+                case "Paper":
+                    if (playerSelect == "Paper") {
+                        beatOrTie = "ties";
+                        outcome = "tied";
+                        winner = computerSelect;
+                        loser = playerSelect;
+                    }
+                    else if (playerSelect == "Scissors") {
+                        outcome = "win";
+                        winner = playerSelect;
+                        loser = computerSelect;
+                        score++;
+                    }
+                    else {
+                        outcome = "lose";
+                        loser = playerSelect;
+                        winner = computerSelect;
+                    }
+                break;
+
+                case "Scissors":
+                    if (playerSelect == "Scissors") {
+                        beatOrTie = "ties";
+                        outcome = "tied";
+                        winner = computerSelect;
+                        loser = playerSelect;
+                    }
+                    else if (playerSelect == "Rock") {
+                        outcome = "win";
+                        winner = playerSelect;
+                        loser = computerSelect;
+                        score++;
+                    }
+                    else {
+                        outcome = "lose";
+                        loser = playerSelect;
+                        winner = computerSelect;
+                    }
+                break;
+            }
+            return `You ${outcome}! ${winner} ${beatOrTie} ${loser}`;
+        }
+        function game() {
+            for (i = 0; i < 5; i++) {
+                let playerSelect = prompt("Choose Rock, Paper, or Scissors.");
+                let computerSelect = computerPlay();
+                console.log(playRound(playerSelect, computerSelect));
+            }
+            console.log(`Your final score is ${score} out of 5!`);
+        }
+    </script>
+</body>
+</html>
